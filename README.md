@@ -20,14 +20,13 @@ Companies whose teams struggle with `kubectl` and YAML. NexusOps gives them:
 
 ## Start here (learning + build track)
 
-**New to the project? Read in this order:**
+**Building the full industry app side-by-side? Start here:**
 
-1. **[docs/SETUP-STEP-BY-STEP.md](docs/SETUP-STEP-BY-STEP.md)** — create GitHub repo + Week 1 (**you run every step**)  
-2. [docs/START-HERE.md](docs/START-HERE.md) — how we learn and build together  
-3. [docs/PRODUCT-VISION.md](docs/PRODUCT-VISION.md) — what we sell to the market  
-4. [docs/LEARNING-ROADMAP.md](docs/LEARNING-ROADMAP.md) — 12-week build plan  
-5. [docs/LINKEDIN-PLAYBOOK.md](docs/LINKEDIN-PLAYBOOK.md) — weekly posts to grow reach  
-6. [learn/week-01/README.md](learn/week-01/README.md) — Week 1 coding exercises  
+1. **[docs/FULL-APP-GUIDE.md](docs/FULL-APP-GUIDE.md)** — learn in `learn/`, peek `reference/`, merge to `app/`  
+2. **[docs/DAILY-COMMITS.md](docs/DAILY-COMMITS.md)** — daily tasks + commit messages  
+3. **[docs/INDUSTRY-FOLDER-STRUCTURE.md](docs/INDUSTRY-FOLDER-STRUCTURE.md)** — production folder layout  
+4. **[docs/SETUP-STEP-BY-STEP.md](docs/SETUP-STEP-BY-STEP.md)** — GitHub + Ubuntu setup  
+5. **[learn/week-02/README.md](learn/week-02/README.md)** — **Week 2 Day 1 (start if Week 1 done)**  
 
 ---
 
@@ -47,11 +46,12 @@ Companies whose teams struggle with `kubectl` and YAML. NexusOps gives them:
 
 ```
 nexusops-platform/
-├── docs/           # Product + learning + LinkedIn guides
-├── learn/          # Week-by-week code you build with us
-├── backend/        # Production API (grows each week)
-├── frontend/       # Console UI (starts ~Week 8)
-└── deploy/         # Docker, lab clusters
+├── app/              # YOUR production API (merge weekly — starts empty)
+├── learn/            # YOU code here each week
+├── reference/        # READ-ONLY complete example (compare, don't copy)
+├── docs/             # Guides, daily commits, LinkedIn
+├── frontend/         # React console (later)
+└── deploy/
 ```
 
 ---
