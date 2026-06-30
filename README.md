@@ -1,6 +1,6 @@
 # NexusOps
 
-**Multi-cloud Kubernetes control plane** — one administrative interface for cluster operations, access governance, incident measurement, and cloud cost visibility.
+**A new enterprise platform for Kubernetes** — one-click multi-cloud operations, governed access, incident intelligence, and FinOps in a single administrative experience.
 
 **Stack:** FastAPI · React · MongoDB · Kubernetes API
 
@@ -8,113 +8,109 @@
 
 ## Vision
 
-Enterprises should operate Kubernetes the way they operate other critical infrastructure: through a governed control plane with clear roles, measurable reliability, and attributable cost — not through ad hoc CLI access and disconnected cloud consoles.
+Kubernetes changed how applications run. It did not change how most organizations operate them. Teams still juggle cloud consoles, CLI tools, spreadsheets for cost, and chat threads for incidents. NexusOps is a new category of platform — an enterprise administrative control plane for Kubernetes — designed to replace that fragmentation with one governed, measurable, one-click experience across every cluster.
 
-NexusOps is built to become the standard administrative layer for teams running Kubernetes across AWS EKS, Azure AKS, Google GKE, and on-premises clusters. The intended outcome is reduced operational friction, faster incident response, controlled access for every persona, and FinOps visibility tied directly to running workloads.
-
----
-
-## What NexusOps is
-
-NexusOps is an enterprise management platform composed of two primary surfaces:
-
-**Administrative Console (React)**  
-A browser-based interface for platform engineers, developers, SREs, and finance users. Users interact with clusters, workloads, incidents, and billing through role-appropriate views — not through kubectl or multiple cloud portals.
-
-**Control API (FastAPI)**  
-The authoritative backend for authentication, authorization, cluster registry, workload orchestration, incident lifecycle, billing synchronization, and audit. All console actions and external integrations flow through this API. OpenAPI documentation is served at `/docs`.
-
-Behind the API, specialized agents connect to Kubernetes API servers, observability systems, and cloud billing endpoints. Platform state is persisted in MongoDB.
+We are not wrapping kubectl. We are not assembling buzzword dashboards for demos. NexusOps is a purpose-built product: register a cluster, operate workloads, respond to incidents, and understand spend — from one console, with one access model, on every cloud.
 
 ---
 
-## How it behaves
+## What we are building
 
-**Cluster registration**  
-A platform administrator registers each Kubernetes cluster with provider metadata (AWS, Azure, GCP, on-prem), region, and API endpoint. Registered clusters appear in the central registry. Health and status are evaluated on demand.
+NexusOps is a unified management platform for organizations that run Kubernetes at scale across AWS EKS, Azure AKS, Google GKE, and on-premises infrastructure.
 
-**Governed access**  
-Every API request is authenticated with JWT and authorized against the caller's role. A developer can operate within assigned namespaces. An SRE can manage incidents and remediation. A FinOps viewer sees cost data only. An auditor has read-only access across the platform with full audit history. Mutating actions are rejected when permissions are insufficient.
+**Administrative Console**  
+A browser-based interface where authorized users complete operational tasks in one action — register clusters, deploy workloads, scale services, restart deployments, open logs, review incidents, and inspect cloud spend — without switching tools or writing commands.
 
-**Day-two operations**  
-Authorized users scale deployments, trigger rollout restarts, and retrieve pod logs through the API or console. Each action is recorded in the audit log with actor, resource, and timestamp.
+**Control API**  
+The secure backend that powers the console and external integrations. Authentication, authorization, cluster registry, workload orchestration, incident lifecycle, billing synchronization, and audit all flow through a versioned REST API with OpenAPI documentation at `/docs`.
 
-**Incident lifecycle**  
-When a failure occurs, an incident is created manually or via Alertmanager webhook. The platform captures detection and resolution timestamps. MTTD (Mean Time To Detect) measures how quickly the issue was identified. MTTR (Mean Time To Repair) measures how quickly service was restored after detection. Summary metrics are available per cluster, service, and time window.
-
-**Cost synchronization**  
-The billing agent pulls spend from cloud provider APIs on a schedule or on demand. Costs are attributed to cluster, team, and environment using provider tags. Finance and platform teams review summaries without accessing operational controls.
-
-**Audit by default**  
-Any change to platform or workload state produces an audit record. This supports post-incident review, compliance, and accountability across distributed teams.
+**Intelligent agents**  
+Dedicated components connect to Kubernetes API servers, observability systems, and cloud billing endpoints. Platform state lives in MongoDB — built for flexible multi-cloud metadata, incident records, and cost attribution at scale.
 
 ---
 
-## Intended outcomes
+## One-click operations
 
-- **For platform teams:** one registry and one API for every cluster, regardless of cloud  
-- **For developers:** self-service workload operations within namespace boundaries  
-- **For SRE:** structured incidents with MTTD and MTTR trends, not unstructured chat triage  
-- **For finance:** cloud spend mapped to teams and clusters, not orphaned billing lines  
-- **For leadership:** a single platform story — operations, reliability, and cost in one place  
+NexusOps is designed around operational simplicity. Complex multi-step workflows are reduced to single actions in the console:
+
+- **Register a cluster** — connect EKS, AKS, GKE, or on-prem in one flow  
+- **Deploy a workload** — select cluster, namespace, and manifest or Helm release  
+- **Scale a service** — adjust replica count without editing YAML on the CLI  
+- **Restart a deployment** — rollout restart from one button  
+- **View logs** — stream pod output from the workload view  
+- **Open an incident** — capture failure context and start the MTTD clock  
+- **Resolve and measure** — close the incident and record MTTR automatically  
+- **Sync billing** — pull multi-cloud spend and attribute by team or environment  
+- **Audit any action** — every click and API call is traceable to a user and timestamp  
+
+The goal is enterprise-grade power with consumer-grade simplicity — the same principle that made administrative consoles the standard for managing complex systems, applied to modern Kubernetes.
 
 ---
 
-## Current status
+## How the platform behaves
 
-Phase 1 is in active development. The control API foundation — authentication, RBAC, cluster registry, incident module, billing agent framework, and K8s integration layer — is being built and validated against the architecture described above.
+**Unified multi-cloud registry**  
+All clusters appear in one inventory regardless of provider. Platform administrators control registration. Health and metadata are visible from a single view.
 
-The administrative console and production-grade SSO integration follow in later phases.
+**Role-based governance**  
+Six roles — Platform Administrator, Cluster Administrator, Developer, SRE, FinOps Viewer, Auditor — each see and do only what their function requires. Every request is authenticated and authorized before execution.
+
+**Incident intelligence**  
+Incidents move through a defined lifecycle. The platform measures MTTD (Mean Time To Detect) from failure onset to detection, and MTTR (Mean Time To Repair) from detection to resolution. Metrics aggregate by cluster, service, and period — giving SRE and leadership concrete reliability data, not anecdotal war stories.
+
+**FinOps integration**  
+Cloud billing data synchronizes from provider APIs. Spend maps to cluster, team, and environment. Finance and engineering share one source of truth for cost attribution.
+
+**Audit everywhere**  
+No silent changes. Registering a cluster, scaling a deployment, or closing an incident leaves a permanent audit record.
 
 ---
 
-## Upcoming enhancements
+## Outcomes
 
-**Near term**  
-- MongoDB-backed persistence for users, clusters, incidents, and audit events  
-- JWT authentication and six-role RBAC enforcement on all routes  
-- Cluster registry with multi-provider support  
-- K8s agent: list and operate on pods and deployments  
-- Incident API with MTTD / MTTR calculation and summary endpoint  
+- One platform instead of four cloud consoles and a shared kubeconfig  
+- One-click day-two ops instead of CLI runbooks for routine tasks  
+- Measured reliability instead of untracked downtime  
+- Attributed cloud cost instead of unexplained monthly spikes  
+- Governed access instead of cluster-admin for everyone  
 
-**Mid term**  
-- Alertmanager webhook for automated incident creation and reduced MTTD  
-- Billing agent integration with AWS, Azure, and GCP cost APIs  
-- Docker Compose stack for local API and MongoDB deployment  
-- Integration and API tests  
+---
 
-**Long term**  
-- React administrative console (cluster tree, workloads, incidents, FinOps)  
-- SSO via OIDC / SAML for enterprise identity providers  
-- Helm chart for platform deployment on Kubernetes  
-- Agent-based connectivity for private clusters  
+## Product roadmap
+
+**Now under development**  
+Control API with MongoDB persistence, JWT authentication, RBAC, cluster registry, K8s workload agent, incident module with MTTD/MTTR, and billing agent framework.
+
+**Next**  
+One-click administrative console (React), Alertmanager-driven incident creation, live AWS/Azure/GCP billing sync, Docker deployment package.
+
+**Future**  
+Enterprise SSO (OIDC/SAML), Helm-based platform install, private-cluster agent connectivity.
 
 ---
 
 ## Architecture
 
 ```
-Console (React)
-      │  HTTPS / REST
-      ▼
-Control API (FastAPI) ──► MongoDB
-      │
-      ├── K8s Agent ──────► EKS · AKS · GKE · on-prem
-      ├── Incident Agent ─► Alertmanager / Prometheus
-      └── Billing Agent ──► AWS · Azure · GCP billing APIs
+Administrative Console (React) — one-click operations
+              │  HTTPS / REST
+              ▼
+       Control API (FastAPI) ──► MongoDB
+              │
+    ┌─────────┼─────────┐
+    ▼         ▼         ▼
+ K8s Agent  Incident   Billing
+            Agent      Agent
+    │         │         │
+  EKS/AKS/  Alertmgr   AWS/Azure/GCP
+  GKE/on-prem
 ```
 
 ---
 
 ## Technology
 
-- Python 3.11+, FastAPI, Pydantic  
-- MongoDB 6.0+  
-- React, TypeScript  
-- Kubernetes Python client  
-- Prometheus, Alertmanager  
-- AWS, Azure, GCP billing SDKs  
-- Docker  
+Python 3.11+, FastAPI, Pydantic, MongoDB 6.0+, React, TypeScript, Kubernetes Python client, Prometheus, Alertmanager, AWS/Azure/GCP billing SDKs, Docker.
 
 ---
 
